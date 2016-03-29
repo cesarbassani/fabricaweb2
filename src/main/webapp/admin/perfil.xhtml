@@ -1,0 +1,45 @@
+<ui:composition template="template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="conteudo">
+
+        <br/>
+        <h:form id="frm">
+
+            <p:outputLabel value="Id" for="id"/>
+            <p:inputText id="id" value="#{perfilController.perfil.id}" readonly="true"/>
+            <p:outputLabel for="descricao" value="Descrição"/>
+            <p:inputText id="descricao" value="#{perfilController.perfil.descricao}"/>
+
+            <p:commandButton value="Salvar" action="#{perfilController.salvar}"
+                    update="frm perfilTable"/>
+
+        <br/>
+
+
+            <p:messages/>
+
+            <p:dataTable id="perfilTable" value="#{perfilController.perfilList}" var="perfil" border="1">
+                <f:facet name="header">Lista de Perfil</f:facet>
+                <p:column headerText="ID">
+                    <h:outputText value="#{perfil.id}"/>
+                </p:column>
+                <p:column headerText="Descrição">
+                    <h:outputText value="#{perfil.descricao}"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Editar" actionListener="#{perfilController.editar(perfil)}" update="@form"/>
+                    <p:commandButton onclick="return confirmaExclusao()"
+                                     actionListener="#{perfilController.excluir(perfil)}" value="Excluir"
+                                     process="@this"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+
+    <script type="text/javascript">
+        function confirmaExclusao() {
+            return window.confirm("Confirma a exclusão?");
+        }
+    </script>
+
+</h:head>
+<body>
+
+<h:form>
+
+    <p:growl id="messages"/>
+
+    <p:menubar>
+        <p:submenu label="Menu" icon="ui-icon-document">
+            <p:submenu label="Cadastros" icon="ui-icon-contact">
+                <p:menuitem value="Usuário" url="formusuario.xhtml"/>
+                <p:menuitem value="Perfil" url="perfil.xhtml"/>
+            </p:submenu>
+        </p:submenu>
+        <f:facet name="options">
+            <p:inputText style="margin-right:10px" placeholder="Search"/>
+            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink"/>
+        </f:facet>
+    </p:menubar>
+
+</h:form>
+
+<ui:insert name="conteudo"/>
+
+</body>
+</html>

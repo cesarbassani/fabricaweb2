@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Cadastro de Usuários</title>
+
+    <script>
+        function confirmaExclusao() {
+            return window.confirm("Confirma a exclusão?");
+        }
+    </script>
+</h:head>
+<h:body>
+    <h3>Cadastro de Usuário</h3>
+
+    <h:form>
+        <h1> Fábrica Web Frameworks </h1>
+        <p:messages/>
+        <p:panelGrid columns="2">
+
+
+            <p:outputLabel value="Perfil"/>
+            <p:selectOneMenu id="perfil"
+                             value="#{usuarioController.usuario.perfil}"
+                             converter="#{perfilConverter}">
+                <f:selectItem itemValue="" itemLabel="Sem Perfil"/>
+                <f:selectItems value="#{perfilController.perfilList}" var="perfil"
+                               itemLabel="#{perfil.descricao}"/>
+            </p:selectOneMenu>
+
+            <p:outputLabel value="Nome:"/>
+            <p:inputText value="#{usuarioController.usuario.nome}"/>
+
+            <p:outputLabel value="Login"/>
+            <p:inputText value="#{usuarioController.usuario.login}"/>
+
+            <p:outputLabel value="Senha"/>
+            <p:password value="#{usuarioController.usuario.senha}" redisplay="true"/>
+
+            <f:facet name="footer">
+
+                <h:panelGroup style="display:block;text-align:center">
+                    <p:commandButton value="Salvar"
+                                     actionListener="#{usuarioController.salvar}" update="@form"/>
+
+                    <p:commandButton value="Cancelar"
+                                     actionListener="#{usuarioController.cancelar}" update="@form"/>
+                </h:panelGroup>
+
+            </f:facet>
+
+        </p:panelGrid>
+
+        <br/><br/>
+
+        <p:dataTable value="#{usuarioController.usuarioList}" var="usu"
+                     border="1">
+            <p:column headerText="ID">
+                #{usu.id}
+            </p:column>
+            <p:column headerText="Perfil">
+                #{usu.perfil.descricao}
+            </p:column>
+
+            <p:column headerText="Nome">
+                #{usu.nome}
+            </p:column>
+            <p:column headerText="Login">
+                #{usu.login}
+            </p:column>
+            <p:column headerText="Senha">
+                #{usu.senha}
+            </p:column>
+
+            <p:column>
+                <p:commandButton onclick="return confirmaExclusao()"
+                                 actionListener="#{usuarioController.excluir(usu)}" value="Excluir"
+                                 process="@this"/>
+                <p:commandButton actionListener="#{usuarioController.editar(usu)}"
+                                 value="Editar" update="@form"/>
+            </p:column>
+
+        </p:dataTable>
+
+    </h:form>
+
+</h:body>
+</html>

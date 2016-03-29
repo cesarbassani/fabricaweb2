@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="fabricaweb2:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="fabricaweb2.war">
+      <element id="artifact" artifact-name="fabricaweb2:war exploded" />
+    </root>
+  </artifact>
+</component>

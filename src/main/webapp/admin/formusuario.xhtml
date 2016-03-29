@@ -1,0 +1,75 @@
+<ui:composition template="template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="conteudo">
+        <h:form id="frm">
+
+            <br/>
+
+            <p:panelGrid columns="2">
+                Perfil:
+                <p:selectOneMenu id="usuarioPerfil" value="#{usuarioController.usuario.perfil}" converter="#{perfilConverter}">
+                    <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                    <f:selectItems value="#{perfilController.perfilList}" var="p"  itemValue="#{p}" itemLabel="#{p.descricao}"/>
+                </p:selectOneMenu>
+                Nome:
+                <p:inputText value="#{usuarioController.usuario.nome}"/>
+                Login:
+                <p:inputText id="login" value="#{usuarioController.usuario.login}">
+                    <f:validateLength maximum="8" minimum="3"/>
+                </p:inputText>
+                Senha:
+                <p:inputText value="#{usuarioController.usuario.senha}">
+                        </p:inputText>
+                E-mail:
+                <p:inputText value="#{usuarioController.usuario.email}">
+                    <f:validator validatorId="emailValidator"/>
+                </p:inputText>
+
+                <p:commandButton value="Salvar" action="#{usuarioController.salvar}" update="frm usuarioTable"/>
+                <p:commandButton value="Cancelar" actionListener="#{usuarioController.cancelar}"/>
+
+            </p:panelGrid>
+
+        <br/>
+
+            <h:messages/>
+
+            <p:dataTable id="usuarioTable" value="#{usuarioController.usuarioList}" var="usu" border="1">
+                <f:facet name="header">Lista de Usuários</f:facet>
+                <p:column>
+                    <f:facet name="header">ID</f:facet>
+                    #{usu.id}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Perfil</f:facet>
+                    #{usu.perfil.descricao}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Nome</f:facet>
+                    #{usu.nome}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Login</f:facet>
+                    #{usu.login}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">E-mail</f:facet>
+                    #{usu.email}
+                </p:column>
+                <p:column>
+                    <p:commandButton icon="fa fa-fw fa-pencil" value="Editar" actionListener="#{usuarioController.editar(usu)}" update="@form"/>
+                    <p:commandButton onclick="return confirmaExclusao()" value="Excluir"
+                                     actionListener="#{usuarioController.excluir(usu)}" icon="fa fa-fw fa-trash"
+                                     process="@this"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3652407966">
+    <data-source source="LOCAL" name="PostgreSQL - fabricaweb2db@localhost" uuid="10f4aa13-4ad5-409b-9382-7d7fa9efd561">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/fabricaweb2db</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>
